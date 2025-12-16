@@ -11,5 +11,13 @@
       "database_name": "ivr-testing-db",
       "database_id": "local-only"
     }
-  ]
+  ],
+  // Twilio configuration (optional - for real voice call testing)
+  // For local development, create .dev.vars file with these values
+  // For production, use: wrangler pages secret put TWILIO_ACCOUNT_SID
+  "vars": {
+    "TWILIO_ACCOUNT_SID": "",
+    "TWILIO_AUTH_TOKEN": "",
+    "TWILIO_PHONE_NUMBER": ""
+  }
 }

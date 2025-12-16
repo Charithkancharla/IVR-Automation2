@@ -1,0 +1,11 @@
+# Twilio Configuration (for real voice call testing)
+# Get these values from https://console.twilio.com
+
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=your_auth_token_here
+TWILIO_PHONE_NUMBER=+1234567890
+
+# For production, use wrangler secrets:
+# npx wrangler pages secret put TWILIO_ACCOUNT_SID --project-name ivr-automation-testing
+# npx wrangler pages secret put TWILIO_AUTH_TOKEN --project-name ivr-automation-testing
+# npx wrangler pages secret put TWILIO_PHONE_NUMBER --project-name ivr-automation-testing
