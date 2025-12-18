@@ -113,6 +113,11 @@ INSERT OR IGNORE INTO monitoring_alerts (alert_type, severity, message, test_cas
 ('performance', 'medium', 'Average response time exceeded threshold', 4, 2, 2000.0, 2350.0, 'acknowledged'),
 ('quality', 'low', 'Voice quality score below optimal level', 3, 1, 95.0, 88.3, 'resolved');
 
+-- Insert default users
+INSERT OR IGNORE INTO users (username, email, password_hash, role, first_name, last_name, is_active) VALUES 
+('admin', 'admin@ivrtesting.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin', 'Admin', 'User', 1),
+('user1', 'user1@ivrtesting.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'user', 'Test', 'User', 1);
+
 -- Insert system configuration
 INSERT OR IGNORE INTO system_config (config_key, config_value, description) VALUES 
 ('default_timeout', '60', 'Default timeout for test cases in seconds'),
@@ -120,3 +125,8 @@ INSERT OR IGNORE INTO system_config (config_key, config_value, description) VALU
 ('voice_quality_threshold', '90.0', 'Minimum acceptable voice quality score'),
 ('alert_email', 'admin@example.com', 'Email address for alert notifications'),
 ('recording_enabled', 'true', 'Enable audio recording for test calls');
+
+-- Insert default notification preferences for users
+INSERT OR IGNORE INTO user_notification_preferences (user_id, email_enabled, sms_enabled, slack_enabled, email_addresses, phone_numbers, slack_webhooks) VALUES 
+(1, 1, 0, 0, '["admin@ivrtesting.com"]', '[]', '[]'),
+(2, 1, 0, 0, '["user1@ivrtesting.com"]', '[]', '[]');

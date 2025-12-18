@@ -9,3 +9,24 @@ TWILIO_PHONE_NUMBER=+1234567890
 # npx wrangler pages secret put TWILIO_ACCOUNT_SID --project-name ivr-automation-testing
 # npx wrangler pages secret put TWILIO_AUTH_TOKEN --project-name ivr-automation-testing
 # npx wrangler pages secret put TWILIO_PHONE_NUMBER --project-name ivr-automation-testing
+
+# JWT Secret for authentication
+JWT_SECRET=your-jwt-secret-key-change-in-production
+
+# Email Notification Configuration
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+EMAIL_FROM_ADDRESS=your-email@gmail.com
+
+# SMS Notification Configuration (Twilio example)
+SMS_PROVIDER=twilio
+SMS_ACCOUNT_ID=ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+SMS_AUTH_TOKEN=your_twilio_auth_token
+SMS_FROM_NUMBER=+1234567890
+
+# Slack Notification Configuration
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
+SLACK_CHANNEL=#ivr-notifications
+SLACK_USERNAME=IVR Bot

@@ -121,6 +121,36 @@ CREATE TABLE IF NOT EXISTS system_config (
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Users Table
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  role TEXT DEFAULT 'user', -- 'admin', 'user', 'viewer'
+  first_name TEXT,
+  last_name TEXT,
+  is_active BOOLEAN DEFAULT TRUE,
+  last_login DATETIME,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- User Notification Preferences Table
+CREATE TABLE IF NOT EXISTS user_notification_preferences (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  email_enabled BOOLEAN DEFAULT TRUE,
+  sms_enabled BOOLEAN DEFAULT FALSE,
+  slack_enabled BOOLEAN DEFAULT FALSE,
+  email_addresses TEXT, -- JSON array of email addresses
+  phone_numbers TEXT, -- JSON array of phone numbers
+  slack_webhooks TEXT, -- JSON array of Slack webhook URLs
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- Create Indexes for Performance
 CREATE INDEX IF NOT EXISTS idx_test_cases_status ON test_cases(status);
 CREATE INDEX IF NOT EXISTS idx_test_cases_type ON test_cases(type);
@@ -132,3 +162,15 @@ CREATE INDEX IF NOT EXISTS idx_test_results_executed_at ON test_results(executed
 CREATE INDEX IF NOT EXISTS idx_call_flow_nodes_flow_id ON call_flow_nodes(flow_id);
 CREATE INDEX IF NOT EXISTS idx_monitoring_alerts_status ON monitoring_alerts(status);
 CREATE INDEX IF NOT EXISTS idx_monitoring_alerts_severity ON monitoring_alerts(severity);
+CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+CREATE INDEX IF NOT EXISTS idx_user_notification_preferences_user_id ON user_notification_preferences(user_id);
+
+-- Additional indexes for performance optimization
+CREATE INDEX IF NOT EXISTS idx_test_cases_created_at ON test_cases(created_at);
+CREATE INDEX IF NOT EXISTS idx_campaigns_created_at ON campaigns(created_at);
+CREATE INDEX IF NOT EXISTS idx_test_results_created_at ON test_results(executed_at);
+CREATE INDEX IF NOT EXISTS idx_monitoring_alerts_created_at ON monitoring_alerts(created_at);
+CREATE INDEX IF NOT EXISTS idx_call_flows_created_at ON call_flows(discovered_at);
+CREATE INDEX IF NOT EXISTS idx_performance_metrics_test_result_id ON performance_metrics(test_result_id);

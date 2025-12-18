@@ -18,6 +18,22 @@
   "vars": {
     "TWILIO_ACCOUNT_SID": "",
     "TWILIO_AUTH_TOKEN": "",
-    "TWILIO_PHONE_NUMBER": ""
+    "TWILIO_PHONE_NUMBER": "",
+    "JWT_SECRET": "ivr-testing-secret-key-change-in-production",
+    // Email notification configuration
+    "SMTP_HOST": "smtp.example.com",
+    "SMTP_PORT": "587",
+    "SMTP_USERNAME": "",
+    "SMTP_PASSWORD": "",
+    "EMAIL_FROM_ADDRESS": "noreply@ivrtesting.com",
+    // SMS notification configuration
+    "SMS_PROVIDER": "twilio",
+    "SMS_ACCOUNT_ID": "",
+    "SMS_AUTH_TOKEN": "",
+    "SMS_FROM_NUMBER": "",
+    // Slack notification configuration
+    "SLACK_WEBHOOK_URL": "",
+    "SLACK_CHANNEL": "#ivr-notifications",
+    "SLACK_USERNAME": "IVR Bot"
   }
 }
